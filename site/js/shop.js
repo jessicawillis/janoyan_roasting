@@ -31,7 +31,8 @@ var coffeeApp = angular.module('coffeeApp', ['ngSanitize', 'ui.bootstrap', 'ui.r
             templateUrl: 'templates/shop.category.html',
             controller: ['$scope', '$stateParams', 'coffees', 'utils', 
               function($scope, $stateParams, coffees, utils) {
-                $scope.category = $stateParams.category;
+
+                Snipcart.execute('refreshProducts');
                 coffees.all().then(function (coffees) { $scope.coffees = utils.findByCategory(coffees, $stateParams.category); });
             }]
           })
@@ -43,7 +44,10 @@ var coffeeApp = angular.module('coffeeApp', ['ngSanitize', 'ui.bootstrap', 'ui.r
                 //resolve: {
                 //  coffee: ['coffees', function(coffees) { coffees.get($stateParams.coffee); }]
                 //},
-                controller: ['$scope', '$stateParams', 'coffees', function($scope, $stateParams, coffees) {
+                controller: ['$scope', '$stateParams', '$location', 'coffees', function($scope, $stateParams, $location, coffees) {
+                  $scope.url = $location.absUrl();
+                  $scope.category = $stateParams.category;
+
                   coffees.get($stateParams.coffee).then(function(coffee) { $scope.coffee = coffee; });
 
                   $scope.dismiss = function() {

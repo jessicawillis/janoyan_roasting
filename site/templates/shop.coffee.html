@@ -12,6 +12,14 @@
     <div class="modal-divider"></div>
     <span class="bag-price">${{ coffee.price }}</span>
     <span class="bag-size">per {{ coffee.bag_size }}oz {{ coffee.container }}</span>
-    <span class="modal-order-text">order</span>
+      <span class="modal-order-text">order</span>
+    <a class="snipcart-add-item"
+      data-item-id="1"
+      data-item-name="{{ coffee.name }}"
+      data-item-price="{{ coffee.price }}"
+      data-item-url="{{ url }}"
+      data-item-description="{{ coffee.description }}">
+      yes
+    </a>
   </div> 
 </div>
